@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Saisie du client</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+          th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<!-- Lister les saisons -->
+<div class="container spacer">
+    <form th:action="@{index}" method="post">
+        <div class="form-group">
+            <input type="text" name="matchId" th:value="${matchId}" hidden="hidden"/>
+            <button type="submit">Retour</button>
+        </div>
+    </form>
+</div>
+<!-- Formulaire de saisie d'une journée -->
+<div class="col-md-6 col-sm-6 col-xs-12 spacer col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">Modifier le score</div>
+        <div class="panel-body">
+            <form method="post" th:action="@{addReport}">
+                <div class="form-group">
+                    <div class="form-group">
+                        <input type="number" name="matchId" id="matchId" th:value="${matchId}" hidden="hidden">
+                        <label class="control-label" for="newDate">Nouvelle date du match:</label>
+                        <input type="datetime-local" id="newDate" name="newDate" th:value="${date}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="reason">Raison:</label>
+                        <input type="text" id="reason" name="reason" th:value="${reason}">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

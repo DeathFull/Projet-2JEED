@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Liste des suspension</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+        th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+
+<div class="container spacer">
+  <form method="post" th:action="@{editSuspendre}">
+    <input type="text" name="matchId" th:value="${matchId}" hidden="hidden"/>
+    <button class="btn btn-primary" role="button" type="submit">Saisir la raison de la suspension</button>
+  </form>
+</div>
+<h1>Suspension</h1>
+<div class="container spacer">
+  <legend>LISTE DES SUSPENSION</legend>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Raison</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e:${pagesuspendre.content}">
+      <td th:text="${e.getId()}"></td>
+      <td th:text="${e.getRaison}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container spacer">
+  <a class="btn btn-primary" role="button" th:href="@{../match/index}">Retour en Arrière</a>
+</div>
+</body>
+</html>

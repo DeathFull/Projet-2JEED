@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des clients</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+          th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="container spacer">
+    <form th:action="@{editCarton}" method="post">
+        <div class="form-group">
+            <input type="text" name="matchId" th:value="${matchId}" hidden="hidden"/>
+            <button type="submit">Saisir un évenement</button>
+        </div>
+    </form>
+</div>
+<div class="container spacer">
+    <legend>LISTE DES CARTON</legend>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Carton</th>
+            <th>Joueur</th>
+            <th>Minute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e:${pagecarton.content}">
+            <td th:text="${e.getId()}"></td>
+            <td th:text="${e.getType()}"></td>
+            <td th:text="${e.getPlayer()}"></td>
+            <td th:text="${e.getGameTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container spacer">
+    <legend>LISTE DES BUT</legend>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Joueur</th>
+            <th>Minute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e:${pagebut.content}">
+            <td th:text="${e.getId()}"></td>
+            <td th:text="${e.getPlayer()}"></td>
+            <td th:text="${e.getGameTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Pagination -->
+<div class="container">
+    <ul class="nav nav-pills">
+        <li th:each="p:${pages}" th:class="${p==pageCourante}? active:''">
+            <a th:text="${p}" th:href="@{index(page=${p},motCle=${motCle})}"></a>
+        </li>
+    </ul>
+</div>
+<div class="container spacer">
+    <a th:href="@{../match/index}">Retour en Arrière</a>
+</div>
+</body>
+</html>

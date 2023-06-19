@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des clients</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+          th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<!-- Accéder au formulaire de saisie d'un match -->
+<div class="container spacer">
+    <a th:href="@{../index}">Accueil</a>
+</div>
+<!-- Champ de recherche -->
+<div class="container spacer">
+    <form th:action="@{index}" method="get">
+        <div class="form-group">
+            <label>Mot clé lieu du match:</label>
+            <input type="text" name="motCle" th:value="${motCle}"/>
+            <button type="submit">Chercher</button>
+        </div>
+    </form>
+</div>
+<!-- Tableau -->
+<div class="container spacer">
+    <legend>LISTE DES MATCHS</legend>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Score</th>
+            <th>Statut</th>
+            <th>Modifier le statut</th>
+            <th>Report</th>
+            <th>Modifier le score</th>
+            <th>Commentaire</th>
+            <th>Voir les evenements</th>
+            <th>Suspendre le match</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e:${pageMatches.content}">
+            <td th:text="${e.getId()}"></td>
+            <td th:text="${e.getDate()}"></td>
+            <td th:text="${e.getLieu()}"></td>
+            <td th:text="${e.getScore()}"></td>
+            <td th:text="${e.getStatut()}"></td>
+            <td>
+                <form method="post" th:action="@{editStatut}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Statut" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{../report/index}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Reporter" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{editScore}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Modifier" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{../commentaire/index}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Voir" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{../evenement/index}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Ajouter" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{../suspendre/index}">
+                    <input type="text" name="matchId" th:value="${e.getId()}" hidden="hidden"/>
+                    <button class="btn btn-primary" role="button" th:text="Suspendre" type="submit"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Pagination -->
+<div class="container">
+    <ul class="nav nav-pills">
+        <li th:each="p:${pages}" th:class="${p==pageCourante}? active:''">
+            <a th:text="${p+1}" th:href="@{index(page=${p},motCle=${motCle})}"></a>
+        </li>
+    </ul>
+</div>
+<div class="container spacer">
+    <a class="btn btn-primary" role="button" th:href="@{../index}">Retour en Arrière</a>
+    <a class="btn btn-primary" role="button" th:href="@{../logout}">Déconnexion</a>
+</div>
+<div class="alert alert-danger" role="alert" th:if="${errorMessage!=null}" th:text="${errorMessage}">
+</div>
+</body>
+</html>

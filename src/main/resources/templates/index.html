@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Accueil</title>
+  <link rel="stylesheet" type= "text/css" href="../static/css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type= "text/css" href="../static/css/mystyle.css"
+        th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="container spacer">
+  <a class="btn btn-primary" role="button" th:href="@{journee/index}">Menu des journées</a>
+  <a class="btn btn-primary" role="button" th:href="@{saison/index}">Menu des saisons</a>
+  <a class="btn btn-primary" role="button" th:href="@{match/index}">Menu des matchs</a>
+</div>
+</body>
+</html>

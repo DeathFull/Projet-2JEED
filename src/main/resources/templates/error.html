@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Error Page</title>
+<link rel="stylesheet" type= "text/css" href="../static/css/bootstrap.min.css"
+   th:href="@{/css/bootstrap.min.css}"/>
+<script src="../static/js/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+<div class="jumbotron alert-danger">
+    <h1>Oops... quelque chose s'est mal passé.</h1>
+    <h1> D'où ce message d'erreur demandé dans le TD!</h1>
+    <h1> A vous de trouver ce qui ne va pas!</h1>
+    <h2 th:text="${status + ' ' + error}"></h2>
+</div>
+</div>
+</body>
+</html>

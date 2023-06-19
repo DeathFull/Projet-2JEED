@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Saisie du client</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+          th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+
+<div class="col-md-6 col-sm-6 col-xs-12 spacer col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">Saisie d'un évenement</div>
+        <div class="panel-body">
+            <form method="post" th:action="edit">
+                <input hidden="hidden" type="number" th:name="matchId" th:value="${matchId}">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" for="type">Type de l'action:</label>
+                        <select name="type" id="type">
+                            <option th:value="Yellow-Card">Carton jaune</option>
+                            <option th:value="Red-Card">Carton rouge</option>
+                            <option th:value="but">BUT</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="player">Le nom du joueur</label>
+                <input name="player" id="player" th:value="${player}">
+                <br/>
+                <label for="gameTime">Minute au moment de l'action</label>
+                <input type="number" name="gameTime" id="gameTime">
+                <br/>
+                <div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container spacer">
+    <form th:action="@{index}" method="post">
+        <div class="form-group">
+            <input type="text" name="matchId" th:value="${matchId}" hidden="hidden"/>
+            <button type="submit">Retour</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Liste des clients</title>
+<link rel="stylesheet" type= "text/css" href="../static/css/bootstrap.min.css"
+   th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type= "text/css" href="../static/css/mystyle.css"
+th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<!-- Accéder au formulaire de saisie d'une journée -->
+<div class="container spacer">
+	<a th:href="@{../index}">Accueil</a>
+</div>
+	<div class="container spacer">
+		<a th:href="@{formJournee}">Saisir une journée</a>
+	</div>
+<!-- Champ de recherche -->
+	<div class="container spacer">
+		<form th:action="@{index}" method="get">
+			<div class="form-group">
+				<label>Mot clé numéro journée:</label>
+				<input type="text" name="motCle" th:value="${motCle}"/>
+				<button type="submit">Chercher</button>
+			</div>
+		</form>
+	</div>
+<!-- Tableau -->
+	<div class="container spacer">
+	<legend> LISTE DES JOURNEES</legend>
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th> <th>Saison</th> <th>Numéro de la journée</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="e:${pageJournees.content}"> 
+				<td th:text="${e.getId()}"></td>
+				<td th:text="${e.getSaison().libelle}"></td>
+				<td th:text="${e.numJournee}"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<!-- Pagination -->
+	<div class="container">
+		<ul class="nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}? active:''">
+				<a th:text="${p+1}"  th:href="@{index(page=${p},motCle=${motCle})}"></a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

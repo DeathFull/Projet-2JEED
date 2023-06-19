@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Saisie du client</title>
+<link rel="stylesheet" type= "text/css" href="../static/css/bootstrap.min.css"
+   th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type= "text/css" href="../static/css/mystyle.css"
+th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<!-- Lister les saisons -->
+	<div class="container spacer">
+		<a th:href="@{index}">Lister les saisons</a>
+	</div>
+<!-- Formulaire de saisie d'une saison -->
+	<div class="col-md-6 col-sm-6 col-xs-12 spacer col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">Saisie d'une saison</div>
+			<div class="panel-body">
+		<form method="post" th:action="SaveSaison" th:objet="saison">
+			<div class="form-group">
+				<div class="form-group">
+					<label class="control-label">Renseigner l'identifiant de la saison:</label>
+					<input type="text" placeholder="Au format 20XX-20XX" th:field="${saison.identifiantSaison}" class="form-control" size="20" maxlength="20">
+					<span th:errors="${saison.identifiantSaison}"></span>
+				</div>
+				
+			</div>
+			<div class="form-group" >
+			    <div class="form-group"  style="color:red" th:text="${errorMessage}"></div>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary">Valider</button>
+				<button type="reset" class="btn btn-secondary">Remettre à zéro</button>
+			</div>
+		</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

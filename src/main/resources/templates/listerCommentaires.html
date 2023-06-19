@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Match</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mystyle.css"
+          th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="container spacer">
+    <form method="post" th:action="@{editCommentaire}">
+        <input type="text" name="matchId" th:value="${matchId}" hidden="hidden"/>
+        <button class="btn btn-primary" role="button" type="submit">Saisir un commentaire</button>
+    </form>
+</div>
+<div class="container spacer">
+    <legend>LISTE DES COMMENTAIRES</legend>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Commentaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e:${pageCommentaire.content}">
+            <td th:text="${e.getId()}"></td>
+            <td th:text="${e.getCommentaire()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container spacer">
+    <a class="btn btn-primary" role="button" th:href="@{../match/index}">Retour en Arrière</a>
+</div>
+</body>
+</html>
